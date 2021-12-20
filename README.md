@@ -2,7 +2,7 @@
 
 ○事前に必要なもの<br>
 ・pimouse_rosのインストール<br>
-$ sudo git clone https://github.com/ryuichiueda/raspimouse_book_info.git<br>
+$ sudo git clone https://github.com/ryuichiueda/pimouse_ros.git<br>
 ・OpenCV関係の設定<br>
 このリポジトリの「USBカメラとOpenCV関係の設定.txt」を参照してください。<br>
 ・rosbridge_suiteのインストール<br>
