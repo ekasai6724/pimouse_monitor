@@ -1,0 +1,20 @@
+raspi3B + ubuntu16.04
+
+$ sudo apt install ros-kinetic-cv-bridge
+$ sudo apt install ros-kinetic-cv-camera
+$ sudo apt install ros-kinetic-image-transport-plugins
+$ cd ~/catkin_ws/src
+$ git clone git@github.com:RobotWebTools/mjpeg_server.git
+$ cd ~/catkin_ws
+$ catkin_make
+
+
+※"libopencv_core.so～: cannot open shared object file: No such file or directory"が出る場合
+1.以下のコマンドでライブラリバイナリファイル"libopencv_core.co～"を探す
+	$ sudo find / -name "libopencv_core.co*"
+2./etc/ld.so.conf.d/opencv.conf(なければ新規作成)に、1.で検索したライブラリバイナリファイルのある場所を記述する
+	例: /opt/ros/kinetic/lib/arm-linux-gnueabihf/
+		(この1行だけでOK)
+3.以下のコマンドで設定を適用する
+	sudo ldconfig -v
+
