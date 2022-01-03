@@ -105,6 +105,11 @@ document.body.addEventListener('keydown', event => {
     }
     $('#vel_fw').html(parseInt(vel_fw));
     $('#vel_rot').html(parseInt(vel_rot));
+    
+    // ゲームパッドリストを取得する
+    var gamepad_list = navigator.getGamepads();
+    console.log(gamepad_list);
+    
 });
 
 // ゲームパッド接続イベント
