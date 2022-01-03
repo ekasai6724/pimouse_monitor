@@ -75,6 +75,30 @@ $('#touchmotion').on('click', function(e){
         $('#vel_rot').html(parseInt(vel_rot));
 });
 
+// キーボードの矢印キー入力
+document.body.addEventListener('keydown', event => {
+        switch (event.key) {
+                case 'ArrowUp':
+                        vel_fw = 100;
+                        vel_rot = 0;
+                        break;
+                case 'ArrowDown':
+                        vel_fw = -100;
+                        vel_rot = 0;
+                        break;
+                case 'ArrowLeft':
+                        vel_fw = 0;
+                        vel_rot = 30;
+                        break;
+                case 'ArrowRight':
+                        vel_fw = 0;
+                        vel_rot = -30;
+                        break;
+        }
+        $('#vel_fw').html(parseInt(vel_fw));
+        $('#vel_rot').html(parseInt(vel_rot));
+});
+
 setInterval(pubMotorValues,100);
 
 document.getElementById('camstream').data = 'http://'
