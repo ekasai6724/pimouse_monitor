@@ -72,6 +72,7 @@ function pubMotorValues(){
 setInterval(pubMotorValues,100);
 
 // モータ速度操作パッドクリック
+/*
 $('#touchmotion').on('click', function(e){
     rect = $('#touchmotion')[0].getBoundingClientRect();
     x = e.pageX - rect.left - window.pageXOffset;
@@ -82,6 +83,7 @@ $('#touchmotion').on('click', function(e){
     $('#vel_fw').html(parseInt(vel_fw));
     $('#vel_rot').html(parseInt(vel_rot));
 });
+*/
 
 // キーボードの矢印キー入力
 document.body.addEventListener('keydown', event => {
@@ -107,17 +109,6 @@ document.body.addEventListener('keydown', event => {
     $('#vel_rot').html(parseInt(vel_rot));
 });
 
-// ゲームパッド接続イベント
-window.addEventListener("gamepadconnected", (e) => {
-    console.log(
-      "Gamepad connected at index %d: %s. %d buttons, %d axes.",
-      e.gamepad.index,
-      e.gamepad.id,
-      e.gamepad.buttons.length,
-      e.gamepad.axes.length
-    );
-});
-
 // ゲームパッド入力ポーリング
 const gameLoop = () => {
     const gamepads = navigator.getGamepads
@@ -136,6 +127,18 @@ const gameLoop = () => {
 
     requestAnimationFrame(gameLoop);
 };
+
+// ゲームパッド接続イベント
+window.addEventListener("gamepadconnected", (e) => {
+    console.log(
+        "Gamepad connected at index %d: %s. %d buttons, %d axes.",
+        e.gamepad.index,
+        e.gamepad.id,
+        e.gamepad.buttons.length,
+        e.gamepad.axes.length
+    );
+    requestAnimationFrame(gameLoop);
+});
 
 // USBカメラ画像表示
 document.getElementById('camstream').data = 'http://'
