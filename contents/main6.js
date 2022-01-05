@@ -105,11 +105,6 @@ document.body.addEventListener('keydown', event => {
     }
     $('#vel_fw').html(parseInt(vel_fw));
     $('#vel_rot').html(parseInt(vel_rot));
-    
-    // ゲームパッドリストを取得する
-    var gamepad_list = navigator.getGamepads();
-    console.log(gamepad_list);
-    
 });
 
 // ゲームパッド接続イベント
@@ -122,6 +117,25 @@ window.addEventListener("gamepadconnected", (e) => {
       e.gamepad.axes.length
     );
 });
+
+// ゲームパッド入力ポーリング
+const gameLoop = () => {
+    const gamepads = navigator.getGamepads
+        ? navigator.getGamepads()
+        : navigator.webkitGetGamepads
+        ? navigator.webkitGetGamepads
+        : [];
+    if (!gamepads) {
+        return;
+    }
+
+    vel_fw  = gamepads[0].axes[1] * 200 * -1;
+    vel_rot = gamepads[0].axes[2] * 200;
+    $('#vel_fw').html(parseInt(vel_fw));
+    $('#vel_rot').html(parseInt(vel_rot));
+
+    requestAnimationFrame(gameLoop);
+};
 
 // USBカメラ画像表示
 document.getElementById('camstream').data = 'http://'
