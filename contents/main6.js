@@ -125,14 +125,14 @@ const gameLoop = () => {
         vel_fw = 0;
     }
     else { 
-        vel_fw  = -200 * gamepads[0].axes[1];
+        vel_fw  = -300 * gamepads[0].axes[1];
     }
     // 旋回方向(axes[2]は←が-1で、左旋回は角度指令+方向)
     if ((-10 < gamepads[0].axes[2]) && (gamepads[0].axes[2] < 10)) {
         vel_rot = 0;
     }
     else {
-        vel_rot = -200 * gamepads[0].axes[2];
+        vel_rot = -300 * gamepads[0].axes[2];
     }
 
     $('#vel_fw').html(parseInt(vel_fw));
