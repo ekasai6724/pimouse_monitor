@@ -57,14 +57,11 @@ function MotorOFF() {
 }
 
 // モータ励磁オンボタンクリック
-$('#motor_on').on('click', function(e){
-    MotorON();
-});
+$('#motor_on').on('click', function(e) { MotorON(); });
 
 // モータ励磁オフボタンクリック
-$('#motor_off').on('click', function(e){
-    MotorOFF();
-});
+$('#motor_off').on('click', function(e) { MotorOFF(); });
+
 
 // ROSのモータ速度データオブジェクト
 var vel = new ROSLIB.Topic({
@@ -102,6 +99,7 @@ $('#touchmotion').on('click', function(e){
 */
 
 // キーボードの矢印キー入力
+/*
 document.body.addEventListener('keydown', event => {
     switch (event.key) {
         case 'ArrowUp':
@@ -124,6 +122,7 @@ document.body.addEventListener('keydown', event => {
     $('#vel_fw').html(parseInt(vel_fw));
     $('#vel_rot').html(parseInt(vel_rot));
 });
+*/
 
 // ゲームパッド入力ポーリング
 const gameLoop = () => {
@@ -136,12 +135,18 @@ const gameLoop = () => {
         return;
     }
 
-    // 前後方向(axes[1]は↑が-1)
+    // モータ励磁オン(STARTボタン)
+    if (gamepads[0].buttons[9].pressed) { MotorON(); }
+    
+    // モータ励磁オフ(SELECTボタン)
+    if (gamepads[0].buttons[10].pressed) { MotorOFF(); }
+    
+    // 前後方向(左スティック上下:axes[1]は↑が-1)
     vel_fw  = -300 * gamepads[0].axes[1];
     if ((-20 < vel_fw) && (vel_fw < 20)) {
         vel_fw = 0;
     }
-    // 旋回方向(axes[2]は←が-1で、左旋回は角度指令+方向)
+    // 旋回方向(右スティック左右:axes[2]は←が-1で、左旋回は角度指令+方向)
     vel_rot = -300 * gamepads[0].axes[2];
     if ((-20 < vel_rot) && (vel_rot < 20)) {
         vel_rot = 0;
