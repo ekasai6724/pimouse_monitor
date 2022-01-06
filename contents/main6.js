@@ -34,26 +34,36 @@ var off = new ROSLIB.Service({
     messageType : 'std_srvs/Trigger'
 });
 
-// モータ励磁オンボタンクリック
-$('#motor_on').on('click', function(e){
+// モータ励磁オン処理
+function MotorON() {
     on.callService(ROSLIB.ServiceRequest(),function(result){
         if(result.success){
             $('#motor_on').attr('class','btn btn-danger');
             $('#motor_off').attr('class','btn btn-default');
             motor_on_fg = true;
         }
-    });
-});
+    });    
+}
 
-// モータ励磁オフボタンクリック
-$('#motor_off').on('click', function(e){
+// モータ励磁オフ処理
+function MotorOFF() {
     off.callService(ROSLIB.ServiceRequest(),function(result){
         if(result.success){
             $('#motor_on').attr('class','btn btn-default');
             $('#motor_off').attr('class','btn btn-primary');
             motor_on_fg = false;
         }
-    });
+    });    
+}
+
+// モータ励磁オンボタンクリック
+$('#motor_on').on('click', function(e){
+    MotorON();
+});
+
+// モータ励磁オフボタンクリック
+$('#motor_off').on('click', function(e){
+    MotorOFF();
 });
 
 // ROSのモータ速度データオブジェクト
