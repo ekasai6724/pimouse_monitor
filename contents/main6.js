@@ -122,12 +122,12 @@ const gameLoop = () => {
 
     // 前後方向(axes[1]は↑が-1)
     vel_fw  = -300 * gamepads[0].axes[1];
-    if ((-10 < vel_fw) && (vel_fw < 10)) {
+    if ((-20 < vel_fw) && (vel_fw < 20)) {
         vel_fw = 0;
     }
     // 旋回方向(axes[2]は←が-1で、左旋回は角度指令+方向)
     vel_rot = -300 * gamepads[0].axes[2];
-    if ((-10 < vel_rot) && (vel_rot < 10)) {
+    if ((-20 < vel_rot) && (vel_rot < 20)) {
         vel_rot = 0;
     }
 
