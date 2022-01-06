@@ -136,10 +136,10 @@ const gameLoop = () => {
     }
 
     // モータ励磁オン(STARTボタン)
-    if (gamepads[0].buttons[9].pressed) { MotorON(); }
+    if (gamepads[0].buttons[8].pressed) { MotorON(); }
     
     // モータ励磁オフ(SELECTボタン)
-    if (gamepads[0].buttons[10].pressed) { MotorOFF(); }
+    if (gamepads[0].buttons[9].pressed) { MotorOFF(); }
     
     // 前後方向(左スティック上下:axes[1]は↑が-1)
     vel_fw  = -300 * gamepads[0].axes[1];
