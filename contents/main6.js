@@ -4,6 +4,8 @@ ros.on('connection', function() {console.log('websocket: connected'); });
 ros.on('error', function(error) {console.log('websocket error: ', error); });
 ros.on('close', function() {console.log('websocket: closed');});
 
+var motor_on_fg = Boolean(0);
+
 // 距離センサデータ読出トピックオブジェクト
 var ls = new ROSLIB.Topic({
     ros : ros,
@@ -38,6 +40,7 @@ $('#motor_on').on('click', function(e){
         if(result.success){
             $('#motor_on').attr('class','btn btn-danger');
             $('#motor_off').attr('class','btn btn-default');
+            motor_on_fg = true;
         }
     });
 });
@@ -48,6 +51,7 @@ $('#motor_off').on('click', function(e){
         if(result.success){
             $('#motor_on').attr('class','btn btn-default');
             $('#motor_off').attr('class','btn btn-primary');
+            motor_on_fg = false;
         }
     });
 });
@@ -61,13 +65,15 @@ var vel = new ROSLIB.Topic({
 
 // ROSにモータ速度データを発行する
 function pubMotorValues(){
-    fw = $('#vel_fw').html();
-    rot = $('#vel_rot').html();
+    if (motor_on_fg) {
+        fw = $('#vel_fw').html();
+        rot = $('#vel_rot').html();
 
-    fw = parseInt(fw)*0.001;
-    rot = 3.141592*parseInt(rot)/180;
-    v = new ROSLIB.Message({linear:{x:fw,y:0,z:0}, angular:{x:0,y:0,z:rot}});
-    vel.publish(v);
+        fw = parseInt(fw)*0.001;
+        rot = 3.141592*parseInt(rot)/180;
+        v = new ROSLIB.Message({linear:{x:fw,y:0,z:0}, angular:{x:0,y:0,z:rot}});
+        vel.publish(v);
+    }
 }
 setInterval(pubMotorValues,100);
 
